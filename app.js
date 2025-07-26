@@ -5,6 +5,13 @@ const app = express();
 
 app.use("/", router);
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-});
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+}
+
+// Export for Vercel
+export default app;
